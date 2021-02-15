@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script src="https://libs.zappar.com/zappar-aframe/0.3.6/zappar-aframe.js"></script>
+    
+    <title>Zappar for A-Frame</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #zappar-placement-ui {
+            position: absolute;
+            bottom: 30px;
+            width: 200px;
+            left: calc(50% - 100px);
+            z-index: 1000;
+
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            font-family: sans-serif;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+        </a-assets>
+
+        <a-entity camera zappar-camera></a-entity>
+        
+        <a-entity zappar-instant="placement-mode: true" id="instant-group">
+
+            <!-- PLACE 3D OBJECTS HERE TO TRACK FROM THE INSTANT ANCHOR -->
+            <a-box position="0 0.5 0"></a-box>
+            
+        </a-entity>
+
+        <div id="zappar-placement-ui">Tap here to place the object</div>
+
+        <script>
+            // When the user taps on the placement UI
+            var placementUI = document.getElementById("zappar-placement-ui");
+            placementUI.addEventListener("click", function() {
+
+                // Set placement-mode to false on the instant tracker group
+                let instantGroup = document.getElementById("instant-group");
+                instantGroup.setAttribute("zappar-instant", "placement-mode: false");
+
+                // Remove the placement UI
+                placementUI.remove();
+            });
+        </script>
+    </a-scene>
+</body>
+
+</html>
