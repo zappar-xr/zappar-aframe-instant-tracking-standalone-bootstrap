@@ -3,10 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://libs.zappar.com/zappar-aframe/0.3.9/zappar-aframe.js"></script>
 
     <title>Zappar for A-Frame</title>
+<script src='https://aframe.io/releases/1.2.0/aframe.min.js'></script><script src='https://libs.zappar.com/zappar-aframe/0.3.32/zappar-aframe.js'></script>
     <style>
         html,
         body {
@@ -21,7 +20,6 @@
             bottom: 30px;
             width: 200px;
             left: calc(50% - 100px);
-            z-index: 1000;
 
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
@@ -34,13 +32,15 @@
 </head>
 
 <body>
+<script type="module" src="index.js"></script>
     <a-scene>
-        <a-assets>
-        </a-assets>
         <!-- Ask user for camera permissions -->
         <a-entity zappar-permissions-ui id="permissions"></a-entity>
         <!-- Browser Compatibility -->
         <a-entity zappar-compatibility-ui id="compatibility"></a-entity>
+        <a-assets>
+        </a-assets>
+
         <a-entity camera zappar-camera></a-entity>
 
         <a-entity zappar-instant="placement-mode: true" id="instant-group">
@@ -50,22 +50,9 @@
 
         </a-entity>
 
-        <div id="zappar-placement-ui">Tap here to place the object</div>
-
-        <script>
-            // When the user taps on the placement UI
-            var placementUI = document.getElementById("zappar-placement-ui");
-            placementUI.addEventListener("click", function() {
-
-                // Set placement-mode to false on the instant tracker group
-                let instantGroup = document.getElementById("instant-group");
-                instantGroup.setAttribute("zappar-instant", "placement-mode: false");
-
-                // Remove the placement UI
-                placementUI.remove();
-            });
-        </script>
     </a-scene>
+
+    <div id="zappar-placement-ui">Tap here to place the object</div>
 </body>
 
 </html>
